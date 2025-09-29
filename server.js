@@ -7,6 +7,7 @@ const validator = require("validator");
 const multer = require('multer');
 const path = require('path');
 const sanitizeHtml = require("sanitize-html");
+require('dotenv').config();  // Load environment variables
 
 const app = express();
 const port = 5000;
@@ -63,7 +64,7 @@ app.use((req, res, next) => {
 });
 
 
-const uri = 'mongodb+srv://Breezy:MONGOdbatlass2025@francisdb.1dakl.mongodb.net/francisBlog?retryWrites=true&w=majority&appName=FrancisDB';
+const uri = process.env.MONGO_URI;
 
  mongoose.connect(uri).then(()=>  
   console.log('DB Connected Successfully.')).catch(err => 
