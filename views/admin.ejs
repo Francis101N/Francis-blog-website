@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBlog Admin Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in { animation: fadeIn 1.5s ease-in-out; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex h-screen">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col p-6 space-y-6">
+    <h1 class="text-2xl font-bold text-indigo-400">MyBlog Admin</h1>
+    <nav class="flex flex-col space-y-4">
+      <a href="#" class="hover:bg-gray-800 px-3 py-2 rounded-lg">📊 Dashboard</a>
+      <a href="#" class="hover:bg-gray-800 px-3 py-2 rounded-lg">📝 Manage Posts</a>
+      <a href="#" class="hover:bg-gray-800 px-3 py-2 rounded-lg">📂 Categories</a>
+      <a href="#" class="hover:bg-gray-800 px-3 py-2 rounded-lg">👤 Users</a>
+      <a href="#" class="hover:bg-gray-800 px-3 py-2 rounded-lg">⚙ Settings</a>
+      <a href="#" class="hover:bg-red-600 px-3 py-2 rounded-lg text-white">🚪 Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main Dashboard -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <!-- Header -->
+    <header class="flex justify-between items-center mb-8">
+      <h2 class="text-3xl font-bold text-gray-800">Dashboard</h2>
+      <div class="flex items-center space-x-4">
+        <span class="text-gray-700">Admin</span>
+        <img src="https://source.unsplash.com/40x40/?face" class="rounded-full w-10 h-10 border" alt="Admin">
+      </div>
+    </header>
+
+    <!-- Stats Cards -->
+    <section class="grid md:grid-cols-4 gap-6 mb-10">
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up">
+        <h3 class="text-gray-500 text-sm">Total Posts</h3>
+        <p class="text-3xl font-bold text-indigo-600">120</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="150">
+        <h3 class="text-gray-500 text-sm">Categories</h3>
+        <p class="text-3xl font-bold text-green-600">15</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="300">
+        <h3 class="text-gray-500 text-sm">Users</h3>
+        <p class="text-3xl font-bold text-pink-600">1,250</p>
+      </div>
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="450">
+        <h3 class="text-gray-500 text-sm">Comments</h3>
+        <p class="text-3xl font-bold text-yellow-600">340</p>
+      </div>
+    </section>
+
+    <!-- Recent Posts -->
+    <section class="bg-white p-6 rounded-xl shadow mb-10" data-aos="fade-up">
+      <h3 class="text-xl font-bold mb-4">📌 Recent Posts</h3>
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="py-3 px-4">Title</th>
+            <th class="py-3 px-4">Author</th>
+            <th class="py-3 px-4">Date</th>
+            <th class="py-3 px-4">Status</th>
+            <th class="py-3 px-4">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b hover:bg-gray-50">
+            <td class="py-3 px-4">How AI is Changing the World</td>
+            <td class="py-3 px-4">Francis</td>
+            <td class="py-3 px-4">Aug 24, 2025</td>
+            <td class="py-3 px-4"><span class="px-2 py-1 bg-green-100 text-green-600 rounded text-sm">Published</span></td>
+            <td class="py-3 px-4">
+              <button class="text-indigo-600 hover:underline">Edit</button> |
+              <button class="text-red-600 hover:underline">Delete</button>
+            </td>
+          </tr>
+          <tr class="border-b hover:bg-gray-50">
+            <td class="py-3 px-4">Top 10 JavaScript Tips</td>
+            <td class="py-3 px-4">Jane Doe</td>
+            <td class="py-3 px-4">Aug 22, 2025</td>
+            <td class="py-3 px-4"><span class="px-2 py-1 bg-yellow-100 text-yellow-600 rounded text-sm">Draft</span></td>
+            <td class="py-3 px-4">
+              <button class="text-indigo-600 hover:underline">Edit</button> |
+              <button class="text-red-600 hover:underline">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Manage Categories -->
+    <section class="bg-white p-6 rounded-xl shadow" data-aos="fade-up">
+      <h3 class="text-xl font-bold mb-4">📂 Manage Categories</h3>
+      <div class="flex space-x-4 mb-4">
+        <input type="text" placeholder="New Category" class="flex-1 px-4 py-2 border rounded-lg focus:ring focus:ring-indigo-200">
+        <button class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700">Add</button>
+      </div>
+      <ul class="space-y-2">
+        <li class="flex justify-between items-center bg-gray-50 px-4 py-2 rounded-lg">
+          <span>Technology</span>
+          <button class="text-red-600 hover:underline">Delete</button>
+        </li>
+        <li class="flex justify-between items-center bg-gray-50 px-4 py-2 rounded-lg">
+          <span>Business</span>
+          <button class="text-red-600 hover:underline">Delete</button>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+</body>
+</html>

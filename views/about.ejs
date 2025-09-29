@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | MyBlog</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .fade-in { animation: fadeIn 1.5s ease-in-out; }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+     body{
+      overflow-x: hidden;
+     }
+     header{
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <%- include('partials/header.ejs') %>
+
+  <!-- Hero -->
+  <section class="relative bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-28 text-center">
+    <div class="fade-in">
+      <h2 class="text-5xl font-extrabold">About Us</h2>
+      <p class="mt-4 text-lg max-w-2xl mx-auto">Get to know the people and vision behind <strong>MyBlog</strong>.</p>
+    </div>
+  </section>
+
+  <!-- Mission & Vision -->
+  <section class="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-12 items-center">
+    <div data-aos="fade-right">
+      <img src="IMAGES/mission&vision.png" alt="Team work" class="rounded-2xl shadow-lg">
+    </div>
+    <div data-aos="fade-left">
+      <h3 class="text-3xl font-bold mb-4 text-gray-800">Our Mission</h3>
+      <p class="text-gray-600 mb-6">
+        At <strong>MyBlog</strong>, we aim to empower writers and readers by creating a platform where 
+        knowledge, creativity, and ideas are freely shared. We believe words can change perspectives, 
+        inspire growth, and build communities.
+      </p>
+      <h3 class="text-3xl font-bold mb-4 text-gray-800">Our Vision</h3>
+      <p class="text-gray-600">
+        To become a go-to hub for anyone seeking inspiration, tutorials, or stories that drive personal 
+        and professional growth around the world.
+      </p>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-gray-800 mb-12" data-aos="fade-up">Meet Our Team 👩‍💻👨‍💻</h3>
+      <div class="grid md:grid-cols-3 gap-10">
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition" data-aos="zoom-in">
+          <img src="IMAGES/fran.png" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Francis">
+          <h4 class="text-xl font-bold">Francis</h4>
+          <p class="text-gray-500">Founder & Backend Developer</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition" data-aos="zoom-in" data-aos-delay="200">
+          <img src="IMAGES/jane.png" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Jane">
+          <h4 class="text-xl font-bold">Jane</h4>
+          <p class="text-gray-500">Frontend Designer</p>
+        </div>
+        
+        <div class="bg-white p-8 rounded-xl shadow-lg hover:shadow-2xl transition" data-aos="zoom-in" data-aos-delay="400">
+          <img src="IMAGES/micheal.png" class="w-24 h-24 rounded-full mx-auto mb-4" alt="Michael">
+          <h4 class="text-xl font-bold">Michael</h4>
+          <p class="text-gray-500">Content Strategist</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %> 
+
+  <script>
+    AOS.init({ duration: 1000, once: true });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Profile | Blog Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans flex items-center justify-center min-h-screen">
+
+  <!-- Profile Card -->
+    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-lg md:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
+
+    <!-- Top Section -->
+    <div class="flex flex-col items-center gap-4">
+      
+      <!-- Avatar -->
+      <img src="../IMAGES/fran.png" 
+           alt="Admin Avatar" 
+           class="w-32 h-32 rounded-full border-4 border-indigo-500 shadow-md">
+      
+      <!-- Info -->
+      <div class="text-center">
+        <h1 class="text-2xl font-bold text-gray-800"><%= loggedAdmin.username %> Admin</h1>
+        <p class="text-gray-500">Blog Administrator</p>
+        <p class="mt-2 text-gray-600">Managing content, users, and ensuring smooth blogging experience 🚀</p>
+        
+        <!-- Contact -->
+        <div class="mt-2 text-gray-600">
+          <a href="mailto:admin@example.com" class="hover:text-indigo-600">📧 admin@example.com</a>
+        </div><br>
+      </div>
+    </div>
+
+    <!-- Editable Fields -->
+    <%- include("../partials/messages") %>
+    <form action="/update-admin-profile" method="POST" class="mt-6 space-y-4">
+      
+      <!-- Username -->
+     <input type="text" name="username"
+       placeholder="Username"
+       value="<%= admin.username %>"
+       class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"><br><br>
+
+      <!-- Email -->
+      <input type="email" name="email" 
+             placeholder="Email Address" 
+             value="<%= admin.email%>"
+             class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"><br><br>
+
+      <!-- Password -->
+      <input type="password" name="password" 
+             placeholder="New Password" 
+             class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:outline-none"><br><br>
+
+      <!-- Actions -->
+      <div class="flex justify-between gap-4 pt-4">
+        <a href="/cooladmin/" class="w-1/2 px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 text-center">Dashboard</a>
+        <button type="submit" class="w-1/2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">Update</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

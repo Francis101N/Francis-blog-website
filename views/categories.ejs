@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyBlog | Categories</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<style>
+  body{
+    overflow-x: hidden;
+  }
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+</style>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <%- include('partials/header.ejs') %>
+
+  <!-- Hero Section -->
+  <section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-24 text-center">
+    <h2 class="text-4xl md:text-5xl font-extrabold" data-aos="fade-down">Explore Categories</h2>
+    <p class="mt-4 text-lg max-w-2xl mx-auto" data-aos="fade-up">
+      Use the dropdown below to filter and explore blog posts by category.
+    </p>
+  </section>
+
+  <!-- Filter Dropdown -->
+  <section class="max-w-7xl mx-auto px-6 mt-10">
+    <div class="flex justify-center mb-8">
+      <select id="categoryFilter" class="px-4 py-2 border rounded-lg shadow focus:ring-2 focus:ring-indigo-500">
+        <option value="all">All Categories</option>
+        <option value="technology">Technology</option>
+        <option value="travel">Travel</option>
+        <option value="food">Food & Recipes</option>
+        <option value="business">Business</option>
+        <option value="design">Design</option>
+        <option value="education">Education</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Categories Grid -->
+  <section class="max-w-7xl mx-auto px-6 pb-16">
+    <div id="categoriesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <!-- Category Card -->
+      <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform" data-category="technology" data-aos="zoom-in">
+        <img src="./IMAGES/tech.jpg" class="w-full h-48 object-cover" alt="Technology">
+        <div class="p-6">
+          <h4 class="font-bold text-xl">Technology</h4>
+          <p class="text-sm text-gray-600 mt-2">Discover the latest in AI, gadgets, coding, and innovation.</p>
+          <a href="#" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">View Posts</a>
+        </div>
+      </div>
+
+      <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform" data-category="travel" data-aos="zoom-in" data-aos-delay="150">
+        <img src="./IMAGES/travel.jpg" class="w-full h-48 object-cover" alt="Travel">
+        <div class="p-6">
+          <h4 class="font-bold text-xl">Travel</h4>
+          <p class="text-sm text-gray-600 mt-2">Explore destinations, tips, and stories from around the world.</p>
+          <a href="#" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">View Posts</a>
+        </div>
+      </div>
+
+      <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform" data-category="food" data-aos="zoom-in" data-aos-delay="300">
+        <img src="./IMAGES/Food & Recipes.jpg" class="w-full h-48 object-cover" alt="Food">
+        <div class="p-6">
+          <h4 class="font-bold text-xl">Food & Recipes</h4>
+          <p class="text-sm text-gray-600 mt-2">From street food to gourmet — recipes and food culture worldwide.</p>
+          <a href="#" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">View Posts</a>
+        </div>
+      </div>
+
+      <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform" data-category="business" data-aos="zoom-in" data-aos-delay="450">
+        <img src="./IMAGES/business.jpg" class="w-full h-48 object-cover" alt="Business">
+        <div class="p-6">
+          <h4 class="font-bold text-xl">Business</h4>
+          <p class="text-sm text-gray-600 mt-2">Insights on entrepreneurship, startups, leadership, and growth.</p>
+          <a href="#" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">View Posts</a>
+        </div>
+      </div>
+
+      <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform" data-category="design" data-aos="zoom-in" data-aos-delay="600">
+        <img src="./IMAGES/design.jpg" class="w-full h-48 object-cover" alt="Design">
+        <div class="p-6">
+          <h4 class="font-bold text-xl">Design</h4>
+          <p class="text-sm text-gray-600 mt-2">Explore creative design trends, UI/UX tips, and inspiration.</p>
+          <a href="#" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">View Posts</a>
+        </div>
+      </div>
+
+      <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform" data-category="education" data-aos="zoom-in" data-aos-delay="750">
+        <img src="./IMAGES/education.jpg" class="w-full h-48 object-cover" alt="Education">
+        <div class="p-6">
+          <h4 class="font-bold text-xl">Education</h4>
+          <p class="text-sm text-gray-600 mt-2">Learning resources, tutorials, and insights to grow your knowledge.</p>
+          <a href="#" class="mt-4 inline-block bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition">View Posts</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %> 
+
+  <script>
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+  </script>
+
+</body>
+</html>
