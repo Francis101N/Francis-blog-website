@@ -10,7 +10,7 @@ const sanitizeHtml = require("sanitize-html");
 require('dotenv').config();  // Load environment variables
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
