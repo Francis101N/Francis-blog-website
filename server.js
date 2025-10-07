@@ -7,6 +7,7 @@ const validator = require("validator");
 const multer = require('multer');
 const path = require('path');
 const sanitizeHtml = require("sanitize-html");
+// const postRoutes = require('./routes/postRoutes');
 require('dotenv').config();  // Load environment variables
 
 const app = express();
@@ -92,15 +93,29 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.get("/", async (req, res) => {
-  try {
-    const posts = await Post.find().sort({ createdAt: -1 }).limit(3);
-    res.render("index", { posts });
-  } catch (err) {
-    console.error(err);
-    res.render("index", { posts: [] }); 
-  }
+app.get('/', async (req, res) => {
+  const posts = await Post.find().sort({ createdAt: -1 }).limit(3);
+  const { post: postId, error, success } = req.query;
+
+  res.render('index', {
+    posts,
+    user: req.session.user,
+    flashPostId: postId || null,
+    flashError: error || null,
+    flashSuccess: success || null,
+  });
 });
+
+app.get('/post/readmore/:id', async (req,res)=>{
+   if(!req.session.user) {
+    req.flash('error_msg', 'Log in first to continue!');
+    return res.redirect('/login');
+   }
+   const id = req.params.id;
+   const posts = await Post.findById(id);
+   res.render("read-post", { posts: [posts] });
+
+})
 
 app.get('/categories',(req,res)=>{
     if(!req.session.user){
@@ -627,6 +642,56 @@ app.get("/cooladmin/posts/delete-post/:id", async (req, res) => {
    }
 });
 
+// Like a post
+app.post('/posts/:id/like', async (req, res) => {
+  try {
+    const userId = req.session.user ? req.session.user._id : req.ip;
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.redirect(`/?post=${req.params.id}&error=Post not found.`);
+    }
+
+    if (post.likedBy.includes(userId)) {
+      return res.redirect(`/?post=${req.params.id}&error=You already liked this post.`);
+    }
+
+    post.likes += 1;
+    post.likedBy.push(userId);
+    await post.save();
+
+    res.redirect(`/?post=${req.params.id}&success=You liked this post!`);
+  } catch (err) {
+    console.error(err);
+    res.redirect(`/?post=${req.params.id}&error=Something went wrong. Try again later.`);
+  }
+});
+
+// Add a comment
+app.post('/posts/:id/comment', async (req, res) => {
+  if (!req.session.user) {
+     req.flash('error_msg','Login first to continue!'); 
+     return res.redirect("/login");
+    }
+  try {
+    const { name, message } = req.body;
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.redirect(`/?post=${req.params.id}&error=Post+not+found`);
+    }
+
+    post.comments.push({ name, message });
+    await post.save();
+
+    // Redirect to home with success message and post ID
+    res.redirect(`/?post=${req.params.id}&success=Comment+added+successfully!`);
+
+  } catch (err) {
+    console.error(err);
+    res.redirect(`/?post=${req.params.id}&error=Something+went+wrong!`);
+  }
+});
 
 
 

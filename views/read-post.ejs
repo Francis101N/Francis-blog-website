@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | ReadMore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<style>
+    body {
+        overflow-x: hidden;
+    }
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+</style>
+
+<body class="bg-gray-50 text-gray-900">
+
+    <!-- Navbar -->
+    <%- include('partials/header.ejs') %>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white py-24 text-center">
+            <h2 class="text-4xl md:text-5xl font-extrabold" data-aos="fade-down">Explore Blog</h2>
+            <p class="mt-4 text-lg max-w-2xl mx-auto" data-aos="fade-up">
+                Read More about this post.
+            </p>
+        </section>
+        <br><br>
+        <section class="max-w-7xl mx-auto px-6 pb-16">
+            <div id="categoriesGrid">
+                <% posts.forEach((post)=> { %>
+                    <div class="category-card bg-white rounded-xl shadow-lg overflow-hidden hover:scale-105 hover:shadow-2xl transition transform"
+                        data-category="technology" data-aos="zoom-in">
+
+                        <img src="/uploads/<%= post.blogImage %>" class="w-full h-[500px] object-cover"
+                            alt="Technology">
+
+                        <div class="p-6">
+                            <h4 class="font-bold text-xl">
+                                <%= post.blogTitle %>
+                            </h4>
+                            <p class="text-sm text-gray-600 mt-2">
+                                <%= post.subTitle %>
+                            </p>
+                        </div>
+
+                        <div class="p-6">
+                            <h1 class="text-lg font-semibold mb-3">All Comments:</h1>
+
+                            <% if (post.comments && post.comments.length> 0) { %>
+                                <ul class="space-y-2">
+                                    <% post.comments.forEach(comment=> { %>
+                                        <li class="border-b border-gray-200 pb-2">
+                                            <strong class="text-gray-800">
+                                                <%= comment.name %>:
+                                            </strong>
+                                            <span class="text-gray-600">
+                                                <%= comment.message %>
+                                            </span>
+                                        </li>
+                                        <% }) %>
+                                </ul>
+                                <% } else { %>
+                                    <p class="text-gray-500 italic">No comments yet.</p>
+                                    <% } %>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <%- include('partials/footer') %>
+
+            <script>
+                AOS.init({
+                    duration: 1000,
+                    once: true,
+                });
+            </script>
+
+</body>
+
+</html>
