@@ -117,13 +117,32 @@ app.get('/post/readmore/:id', async (req,res)=>{
 
 })
 
-app.get('/categories',(req,res)=>{
-    if(!req.session.user){
+app.get('/categories', async (req, res) => {
+  if (!req.session.user) {
     req.flash("error_msg", "Log in first to continue!");
     return res.redirect('/login');
-    }
-    res.render('categories');
-})
+  }
+
+  try {
+    const posts = await Post.find({}).sort({ createdAt: -1 });
+    const categories = await Category.find({}).sort({ createdAt: -1 });
+    const { post: postId, error, success } = req.query;
+
+    res.render('categories', {
+      posts,
+      categories, // ✅ Pass categories here
+      user: req.session.user,
+      flashPostId: postId || null,
+      flashError: error || null,
+      flashSuccess: success || null,
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Server Error');
+  }
+});
+
 app.get('/about',(req,res)=>{
     res.render('about');
 })
@@ -653,17 +672,17 @@ app.post('/posts/:id/like', async (req, res) => {
     }
 
     if (post.likedBy.includes(userId)) {
-      return res.redirect(`/?post=${req.params.id}&error=You already liked this post.`);
+      return res.redirect(`/categories?post=${req.params.id}&error=You already liked this post.`);
     }
 
     post.likes += 1;
     post.likedBy.push(userId);
     await post.save();
 
-    res.redirect(`/?post=${req.params.id}&success=You liked this post!`);
+    res.redirect(`/categories?post=${req.params.id}&success=You liked this post!`);
   } catch (err) {
     console.error(err);
-    res.redirect(`/?post=${req.params.id}&error=Something went wrong. Try again later.`);
+    res.redirect(`/categories?post=${req.params.id}&error=Something went wrong. Try again later.`);
   }
 });
 
@@ -685,11 +704,11 @@ app.post('/posts/:id/comment', async (req, res) => {
     await post.save();
 
     // Redirect to home with success message and post ID
-    res.redirect(`/?post=${req.params.id}&success=Comment+added+successfully!`);
+    res.redirect(`/categories?post=${req.params.id}&success=Comment+added+successfully!`);
 
   } catch (err) {
     console.error(err);
-    res.redirect(`/?post=${req.params.id}&error=Something+went+wrong!`);
+    res.redirect(`/categories?post=${req.params.id}&error=Something+went+wrong!`);
   }
 });
 
